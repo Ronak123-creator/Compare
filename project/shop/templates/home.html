@@ -1,0 +1,220 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}Compare Prices of Products at one place{% endblock %}
+
+
+
+{% block content %}
+{% comment %} <div class="category">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col" style="max-width: 400px; display: flex; justify-content: center;">
+        <a href="laptop" class="category-item" style="width: 100px; margin-right: 5px;"> Laptops</a>
+        <a href="#" class="category-item" style="width: 100px;">Smartphone</a>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+
+<div class="products mt-4 text-center" id="products1">
+  <div class="container">
+    <p style="font-family: 'Times New Roman', Times, serif; font-size: 32px;">Best Gaming Laptop</p>
+    <hr>
+    <div class="row">
+      {% for data in gaming %}
+      <div class="col-sm-6 col-md-3 product-card {% if forloop.counter <= 4 %}visible{% endif %}">
+        <div class="card">
+          <a href="{% url 'detail' data.id %}"></a>
+          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+          <div class="card-body px-2">
+            <h6 class="card-title">{{data.title}}</h6>
+            <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <div class="button-group" style="margin-bottom: 10px;">
+        <button class="btn btn-secondary mt-3 show-more-btn" data-target="#products1">Show More</button>
+        <button class="btn btn-secondary mt-3 show-less-btn" style="display: none;">Show Less</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="products mt-4 text-center" id="products2">
+  <div class="container">
+    <p style="font-family: 'Times New Roman', Times, serif; font-size: 32px;">Best Laptop</p>
+    <hr>
+    <div class="row">
+      {% for data in best %}
+      <div class="col-sm-6 col-md-3 product-card {% if forloop.counter <= 4 %}visible{% endif %}">
+        <div class="card">
+          <a href="{% url 'detail' data.id %}"></a>
+          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+          <div class="card-body px-2">
+            <h6 class="card-title">{{data.title}}</h6>
+            <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <div class="button-group" style="margin-bottom: 10px;">
+        <button class="btn btn-secondary mt-3 show-more-btn" data-target="#products2">Show More</button>
+        <button class="btn btn-secondary mt-3 show-less-btn" style="display: none;">Show Less</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="products mt-4 text-center" id="products3">
+  <div class="container">
+    <p style="font-family: 'Times New Roman', Times, serif; font-size: 32px;">Best Laptop Between 90,000-120,000</p>
+    <hr>
+    <div class="row">
+      {% for data in best_under_120000 %}
+      <div class="col-sm-6 col-md-3 product-card {% if forloop.counter <= 4 %}visible{% endif %}">
+        <div class="card">
+          <a href="{% url 'detail' data.id %}"></a>
+          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+          <div class="card-body px-2">
+            <h6 class="card-title">{{data.title}}</h6>
+            <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <div class="button-group" style="margin-bottom: 10px;">
+        <button class="btn btn-secondary mt-3 show-more-btn" data-target="#products3">Show More</button>
+        <button class="btn btn-secondary mt-3 show-less-btn" style="display: none;">Show Less</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="products mt-4 text-center" id="products4">
+  <div class="container">
+    <p style="font-family: 'Times New Roman', Times, serif; font-size: 32px;">Best Laptop Between 60,000-90,000</p>
+    <hr>
+    <div class="row">
+      {% for data in best_under_90000 %}
+      <div class="col-sm-6 col-md-3 product-card {% if forloop.counter <= 4 %}visible{% endif %}">
+        <div class="card">
+          <a href="{% url 'detail' data.id %}"></a>
+          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+          <div class="card-body px-2">
+            <h6 class="card-title">{{data.title}}</h6>
+            <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <div class="button-group" style="margin-bottom: 10px;">
+        <button class="btn btn-secondary mt-3 show-more-btn" data-target="#products4">Show More</button>
+        <button class="btn btn-secondary mt-3 show-less-btn" style="display: none;">Show Less</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="products mt-4 text-center" id="products5">
+  <div class="container">
+    <p style="font-family: 'Times New Roman', Times, serif; font-size: 32px;">Best Laptop Below 60,000</p>
+    <hr>
+    <div class="row">
+      {% for data in best_under_60000 %}
+      <div class="col-sm-6 col-md-3 product-card {% if forloop.counter <= 4 %}visible{% endif %}">
+        <div class="card">
+          <a href="{% url 'detail' data.id %}"></a>
+          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+          <div class="card-body px-2">
+            <h6 class="card-title">{{data.title}}</h6>
+            <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <div class="button-group" style="margin-bottom: 10px;">
+        <button class="btn btn-secondary mt-3 show-more-btn" data-target="#products5">Show More</button>
+        <button class="btn btn-secondary mt-3 show-less-btn" style="display: none;">Show Less</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .product-card:not(.visible) {
+    display: none;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const showMoreBtns = document.querySelectorAll(".show-more-btn");
+    const showLessBtns = document.querySelectorAll(".show-less-btn");
+
+    showMoreBtns.forEach((showMoreBtn, index) => {
+      const showLessBtn = showLessBtns[index];
+      const productContainer = document.querySelector(showMoreBtn.getAttribute("data-target"));
+      const productCards = productContainer.querySelectorAll(".product-card");
+      let visibleCount = 4; // Initially show 4 items.
+
+      showMoreBtn.addEventListener("click", function () {
+        for (let i = visibleCount; i < visibleCount + 4; i++) {
+          if (productCards[i]) {
+            productCards[i].style.display = "block";
+          }
+        }
+        visibleCount += 4;
+
+        if (visibleCount >= productCards.length) {
+          showMoreBtn.style.display = "none";
+          showLessBtn.style.display = "block";
+        }
+      });
+
+      showLessBtn.addEventListener("click", function () {
+        for (let i = visibleCount - 4; i < visibleCount; i++) {
+          if (productCards[i]) {
+            productCards[i].style.display = "none";
+          }
+        }
+        visibleCount -= 4;
+
+        if (visibleCount <= 4) {
+          showMoreBtn.style.display = "block";
+          showLessBtn.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+{% endblock %}

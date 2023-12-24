@@ -1,0 +1,122 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Compare Products{% endblock %}
+
+{% block styles %}
+<style>
+.table-bordered td, .table-bordered th{text-align:center; vertical-align:middle}
+.table-bordered th{text-align:right}
+
+.table th {
+    text-transform: uppercase;
+    size: 18px;
+    
+  }
+
+  .image-cell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-cell img {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .image-cell:hover img {
+    transform: scale(1.2);
+  }
+  th {
+    width: 20%;
+  }
+  td {
+    width: 40%;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="p-3 mb-4 bg-white">
+    <h1 class="page-heading"><span>Product Comparison</span></h1>
+    <table>
+        <tr>
+            <td class="image-cell" width="35%"><img class="img-fluid" src="{{product1.image}}" alt="{{product1.title}}"></td>
+            <td class="image-cell" width="35%"><img class="img-fluid" src="{{product2.image}}" alt="{{product2.title}}" style="margin-left: 30px;"></td>
+        </tr>
+    </table>
+
+    <table class="table table-striped">
+        <tbody>
+            
+            <tr>
+                <th>PRODUCT</th>
+                <td>{{product1.title}}</td>
+                <td>{{product2.title}}</td>
+                <td>{{product3.title}}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{product1.brand}}</td>
+                <td>{{product2.brand}}</td>
+            </tr>
+            <tr>
+                <th>Processor</th>
+                <td>{{product1.processor_info}}</td>
+                <td>{{product2.processor_info}}</td>
+            </tr>
+            <tr>
+                <th>Generation</th>
+                <td>{{product1.generation}}th Gen</td>
+                <td>{{product2.generation}}th Gen</td>
+            </tr>
+            <tr>
+                <th>Ram</th>
+                <td>{{product1.ramm}}</td>
+                <td>{{product2.ramm}}</td>
+            </tr>
+            <tr>
+                <th>Storage</th>
+                <td>{{product1.sstorage}}</td>
+                <td>{{product2.sstorage}}</td>
+            </tr>
+            <tr>
+                <th>Display</th>
+                <td>{{product1.display}}</td>
+                <td>{{product2.display}}</td>
+            </tr>
+            <tr>
+                <th>Graphics</th>
+                <td>{{product1.graphics}}</td>
+                <td>{{product2.graphics}}</td>
+            </tr>
+            <tr>
+                <th>Battery</th>
+                <td>{{product1.battery}}</td>
+                <td>{{product2.battery}}</td>
+            </tr>
+            <tr>
+                <th>Operating System</th>
+                <td>{{product1.operating_system}}</td>
+                <td>{{product2.operating_system}}</td>
+            </tr>
+            <tr>
+                <th>TouchScreen</th>
+                <td>{{product1.touchscreen}}</td>
+                <td>{{product2.touchscreen}}</td>
+            </tr>
+            <tr>
+                <th>Pros</th>
+                <td>{{ram1}}{{ram3}} <br>{{processor1}}{{processor3}} <br>{{gpu1}}{{gpu3}} <br>{{storage1}}{{storage3}}</td>
+                <td>{{ram2}}{{ram3}} <br>{{processor2}}{{processor3}} <br>{{gpu2}}{{gpu3}} <br>{{storage2}}{{storage3}}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a href="{% url 'detail' product1.id %}" class="btn btn-success">View Detail</a></td>
+                <td><a href="{% url 'detail' product2.id %}" class="btn btn-success">View Detail</a></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+{% endblock %}

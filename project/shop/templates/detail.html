@@ -1,0 +1,258 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}{{product.title}}{% endblock %}
+
+{% block styles %}
+  <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+  <style>
+    th {
+      width: 20%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% comment %} <div class="search">
+        <!-- filter removed -->
+        
+        <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" name="query" placeholder="Search Product...">
+            <div class="input-group-append">
+                <button class="btn btn-theme" type="submit"><i class="material-icons">search</i> Search</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>
+    </div> {% endcomment %}
+
+    <div class="product-detail p-5 mb-4 border bg-white">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <div class="row mx-lg-n5">
+          <div class="col-lg-4 px-lg-5 mb-4 border-right">
+            <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+              <img class="img-fluid" src="{{product.image}}" alt="{{product.title}}">
+            </div>
+          </div>          
+        <div class="col-lg-8 px-lg-5">
+            <!-- <h2 class="product-label">Brand: {{product.brand}}<button class="float-right btn btn-theme btn-sm" data-toggle="modal" data-target="#exampleModal">+ Price Alert <i class="material-icons">notifications_active</i></button></h2> -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="3"><h2 style="text-align: center;">{{product.title}}</h2></th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Brand:</th>
+                  <td> {{product.brand}}</td>
+              </tr>
+                <tr>
+                  <th scope="row">Processor:</th>
+                  <td>{{product.processor_info}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Display:</th>
+                  <td>{{product.display}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">RAM:</th>
+                  <td>{{product.ramm}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Storage:</th>
+                  <td>{{product.sstorage}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Generation:</th>
+                  <td>{{product.generation}} Gen</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <h2>{{product.title}}</h2>
+            <h4>Features:</h4>
+            <ul class="list-unstyled">
+            <li>Processor: {{product.features.series}}</li>
+            <li>Display: {{product.display}}</li>
+            <li>RAM: {{product.ram}}</li>
+            <li>Storage: {{product.storage}}</li>
+            <li>Generation: {{product.generation}}</li>
+            </ul> -->
+
+            <div class="key-info mb-4">
+            <!-- {{product.description}} -->
+            </div>
+            <!-- ./key-info -->
+        </div>
+        </div>      
+        <br>
+        <h2 style="text-align: center;">Specifications</h2>
+            
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row">Model</th>
+              <td>{{product.model}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Processor</th>
+              <td>{{product.processor_info}}</td>
+            </tr>
+            <tr>
+              <th scope="row">RAM</th>
+              <td>{{product.ramm}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Storage</th>
+              <td>{{product.sstorage}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Generation</th>
+              <td>{{product.generation}} Gen</td>
+            </tr>
+            <tr>
+              <th scope="row">Graphics</th>
+              <td>{{product.graphics}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Display</th>
+              <td>{{product.display}}</td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Resolution</th>
+              <td>{{product.maximum_display_resulation}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Battery</th>
+              <td>{{product.battery}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Operating System</th>
+              <td>{{product.operating_system}}</td>
+            </tr>
+            <tr>
+              <th scope="row">TouchScreen</th>
+              <td>{{product.touchscreen}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Color</th>
+              <td>{{prouct.color}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Warrenty</th>
+              <td>{{product.warrenty}}</td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Insurance</th>
+              <td>{{product.insurance}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Ports and Connectivity</th>
+              <td>{{product.ports_and_connectivity}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <h2 style="text-align: center;">Product Price in Different Websites</h2>
+
+        <table class="table">
+          <tbody>
+            <tr>
+              <th style="width: 15%;"><img class="img-fluid" src="{{product.logo}}" alt="{{product.title}}"></th>
+              <td style="padding-top: 26px; font-size: 15px;" > {{product.title}}</td>
+              <td style="width: 20%; padding-top: 26px; font-size: 15px;">{{product.price}}</td>
+              <td style="width: 15%;  padding-top: 26px; font-size: 15px;"><a href="{{product.link}}" class="btn btn-outline-primary">Visit Website</a></td>
+            </tr>
+            {%  for i in similar_price %}
+            <tr>
+              <th style="width: 15%;"><img class="img-fluid" src="{{i.logo}}" alt="{{product.title}}"></th>
+              <td style="padding-top: 26px; font-size: 15px;"> {{i.title}}</td>
+              <td style="width: 20%; padding-top: 26px; font-size: 15px;"> Rs.{{i.price}}</td>
+              <td style="width: 15%;  padding-top: 26px; font-size: 15px;"><a href="{{i.link}}" class="btn btn-outline-primary">Visit Website</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create an alert on Price Drop</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <!-- user alert form removed -->
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="featured-product p-3 px-4 mb-4 border bg-white">
+        <h2>Similar Products <div class="owlNav float-right"></div></h2>
+        <div class="owl-carousel owl-theme">
+            {% for data in similar_products %}
+            <div class="item">
+              <a href="{% url 'detail' data.id %}"></a>
+              <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+              <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+              <div class="card-body px-2">
+                <h6 class="card-title">{{data.title}}</h6>
+                <p class="card-text">Best Price: <span class="red">{{data.price}}</span></p>
+              </div>
+            </div>            
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+    <!-- ./featured-product -->
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".validated").validate();
+
+    $('.owl-carousel').owlCarousel({
+      loop:true,
+      margin:30,
+      responsiveClass:true,
+      lazyLoad:true,
+      dots:false,
+      responsive:{
+        0:{
+          items:1,
+          nav:true
+        },
+        992:{
+          items:3,
+          nav:false
+        },
+        1200:{
+          items:4,
+          nav:true,
+          loop:false
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,319 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}Filter Product{% endblock %}
+
+{% block content %}
+
+<div class="category" style="display: flex; justify-content: space-around;">
+    <div class="category2 d-none d-md-block" style="width: 15%; margin-left: 3%;">
+        <h1 style="margin-top: 30px;">Filter Products</h1>
+        <hr style="margin-top: 22px;">
+        <form method="GET" action="{% url 'filter_products' %}">
+            <!-- Brand options -->
+            
+        
+            <!-- filter for brand section here -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="brand" id="brand_any" value="" {% if not request.GET.brand %}checked{% endif %}>
+                <label class="form-check-label" for="brand_any" style="font-size: 16px;">
+                    <b>Brand</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="brand" id="brand_dell" value="Dell" {% if request.GET.brand == 'Dell' %}checked{% endif %}>
+                <label class="form-check-label" for="brand_dell">
+                    Dell
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="brand" id="brand_lenevo" value="Lenovo" {% if request.GET.brand == 'Lenovo' %}checked{% endif %}>
+                <label class="form-check-label" for="brand_lenovo">
+                    Lenovo
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="brand" id="brand_acer" value="acer" {% if request.GET.brand == 'Acer' %}checked{% endif %}>
+                <label class="form-check-label" for="brand_acer">
+                    Acer
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="brand" id="brand_hp" value="HP" {% if request.GET.brand == 'HP' %}checked{% endif %}>
+                <label class="form-check-label" for="brand_hp">
+                    HP
+                </label>
+            </div>
+            <hr>
+        
+            <!-- filter for processor section here -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="processor" id="processor_any" value="" {% if not request.GET.processor %}checked{% endif %}>
+                <label class="form-check-label" for="processor_any" style="font-size: 16px;">
+                   <b> Processor</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="processor" id="processor_i3" value="i3" {% if request.GET.processor == 'i3' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_i3">
+                    i3
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="processor" id="processor_i5" value="i5" {% if request.GET.processor == 'i5' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_i5">
+                    i5
+                </label>
+        
+                <br>
+                <input class="form-check-input" type="radio" name="processor" id="processor_i7" value="i7" {% if request.GET.processor == 'i7' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_i7">
+                    i7
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="processor" id="processor_i9" value="i9" {% if request.GET.processor == 'i9' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_i9">
+                    i9        
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="processor" id="processor_amd" value="AMD" {% if request.GET.processor == 'AMD' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_amd">
+                    AMD
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="processor" id="processor_celeron" value="celeron" {% if request.GET.processor == 'celeron' %}checked{% endif %}>
+                <label class="form-check-label" for="processor_celeron">
+                    Celeron
+                </label>
+            </div>
+            <hr>
+            <!-- Repeat for other processor options -->
+        
+            <!-- filter for RAM section here -->
+            
+            <!-- RAM options -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ram" id="ram_any" value="" {% if not request.GET.ram %}checked{% endif %}>
+                <label class="form-check-label" for="ram_any" style="font-size: 16px;">
+                    <b>RAM </b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ram" id="ram_4GB" value="4" {% if request.GET.ram == '4' %}checked{% endif %}>
+                <label class="form-check-label" for="ram_4GB">
+                    4GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="ram" id="ram_6GB" value="6" {% if request.GET.ram == '6' %}checked{% endif %}>
+                <label class="form-check-label" for="ram_6GB">
+                    6GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="ram" id="ram_8GB" value="8" {% if request.GET.ram == '8' %}checked{% endif %}>
+                <label class="form-check-label" for="ram_8GB">
+                    8GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="ram" id="ram_12GB" value="12" {% if request.GET.ram == '12' %}checked{% endif %}>
+                <label class="form-check-label" for="ram_12GB">
+                    12GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="ram" id="ram_16GB" value="16" {% if request.GET.ram == '16' %}checked{% endif %}>
+                <label class="form-check-label" for="ram_16GB">
+                    16GB
+                </label>
+            </div>
+            <hr>
+            <!-- Repeat for other RAM options -->
+            <!-- filter for Storage Section here -->
+            
+            <!-- Storage options -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="storage" id="storage_any" value="" {% if not request.GET.storage %}checked{% endif %}>
+                <label class="form-check-label" for="storage_any" style="font-size: 16px;">
+                    <b>Storage </b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="storage" id="storage_128GB" value="128" {% if request.GET.storage == '128' %}checked{% endif %}>
+                <label class="form-check-label" for="storage_128GB">
+                    128GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="storage" id="storage_256GB" value="256" {% if request.GET.storage == '256' %}checked{% endif %}>
+                <label class="form-check-label" for="storage_256GB">
+                    256GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="storage" id="storage_512GB" value="512" {% if request.GET.storage == '512' %}checked{% endif %}>
+                <label class="form-check-label" for="storage_512GB">
+                    512GB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="storage" id="storage_1TB" value="1" {% if request.GET.storage == '1' %}checked{% endif %}>
+                <label class="form-check-label" for="storage_1TB">
+                    1TB
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="storage" id="storage_2TB" value="2" {% if request.GET.storage == '2' %}checked{% endif %}>
+                <label class="form-check-label" for="storage_2TB">
+                    2TB
+                </label>
+            </div>
+            <hr>
+            
+        
+            <!-- Display Section starts here -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="display_size" id="display_size_any" value="" {% if not request.GET.display_size %}checked{% endif %}>
+                <label class="form-check-label" for="display_size_any" style="font-size: 16px;">
+                     <b>Display Size</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="display_size" id="display_size_14" value="14" {% if request.GET.display_size == '14' %}checked{% endif %}>
+                <label class="form-check-label" for="display_size_14">
+                    14"
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="display_size" id="display_size_15_6" value="15.6" {% if request.GET.display_size == '15.6' %}checked{% endif %}>
+                <label class="form-check-label" for="display_size_15_6">
+                    15.6"
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="display_size" id="display_size_16" value="16" {% if request.GET.display_size == '16' %}checked{% endif %}>
+                <label class="form-check-label" for="display_size_16">
+                    16"
+                </label>
+            </div>
+            <hr>
+        
+            
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="touchscreen" id="touchscreen_any" value="" {% if not request.GET.touchscreen %}checked{% endif %}>
+                <label class="form-check-label" for="touchscreen_any" style="font-size: 16px;">
+                     <b>TouchSceen</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="touchscreen" id="touchscreen_yes" value="yes" {% if request.GET.touchscreen == 'yes' %}checked{% endif %}>
+                <label class="form-check-label" for="touchscreen_yes">
+                    Yes
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="touchscreen" id="touchscreen_no" value="no" {% if request.GET.touchscreen == 'no' %}checked{% endif %}>
+                <label class="form-check-label" for="touchscreen_no">
+                    No
+                </label>
+            </div>
+            <hr>
+            
+
+            <!-- Price Range Filter -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="price" id="price_any" value="" {% if not request.GET.price %}checked{% endif %}>
+                <label class="form-check-label" for="price_any" style="font-size: 16px;">
+                    <b>Price</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="price" id="price_1" value="<50000" {% if request.GET.price == '<50000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_1">
+                    Less than 50,000
+                </label>
+                <br>
+                <!-- You can add more price ranges like this -->
+                <input class="form-check-input" type="radio" name="price" id="price_2" value="50000-70000" {% if request.GET.price == '50000-70000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_2">
+                    50,000 - 70,000
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="price" id="price_3" value="70001-90000" {% if request.GET.price == '70001-90000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_3">
+                    70,000 - 90,000
+                </label>
+                <br>
+
+                <input class="form-check-input" type="radio" name="price" id="price_4" value="90001-120000" {% if request.GET.price == '90001-120000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_4">
+                    90,000 - 120,000
+                </label>
+                <br>
+
+                <input class="form-check-input" type="radio" name="price" id="price_5" value="120001-150000" {% if request.GET.price == '90001-150000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_5">
+                    120,000 - 150,000
+                </label>
+                <br>
+
+                <input class="form-check-input" type="radio" name="price" id="price_6" value=">150000" {% if request.GET.price == '>150000' %}checked{% endif %}>
+                <label class="form-check-label" for="price_6">
+                    More than 150,000
+                </label>
+                <br>
+
+            </div>
+            <hr>
+
+            <!-- Repeat for other brand options -->
+        
+            <!-- Other filter options similarly -->
+        
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Apply Filters</button>
+        </form>
+    </div>
+    
+    
+      
+    <div class="categ" style="width: 80%;">
+        <div class="category1">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col" style="max-width: 180px">
+                  <a href="#" class="category-item"><i class="material-icons mr-2">laptop</i> Laptops</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="products mt-4 text-center">
+            <div class="container">
+                <div class="row">
+                  {% for data in filtered_data %}
+                  <div class="col-sm-6 col-md-3">
+                      <div class="card">
+                          <a href="{% url 'detail' data.id %}"></a>
+                          <button class="btn btn-sm btn-primary btn-compare">+ Compare</button>
+                          <img class="card-img-top" src="{{data.image}}" alt="{{data.title}}">
+                          <div class="card-body px-2">
+                          <h6 class="card-title">{{data.title}}</h6>
+                          <p class="card-text">Best Price: <span class="red"> {{data.pprice}}</span></p>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+        
+        <div class="pagination">
+            <span class="step-links">
+                {% if filtered_data.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ filtered_data.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current-page">
+                    Page {{ filtered_data.number }} of {{ filtered_data.paginator.num_pages }}.
+                </span>
+        
+                {% if filtered_data.has_next %}
+                    <a href="?page={{ filtered_data.next_page_number }}">next</a>
+                    <a href="?page={{ filtered_data.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    
+    
+    
+</div>
+
+{% endblock %}

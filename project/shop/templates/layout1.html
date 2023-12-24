@@ -1,0 +1,414 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <title>{% block title %}{% endblock %} | Device Match </title>
+
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  
+  <!-- extra css starts -->
+  {% block styles %}
+  {% endblock %}
+  <!-- extra css ends -->
+
+  <!-- Base css file -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="top-header">
+        <div class="row align-items-center">
+          <div class="col logo">
+            <a href="/"><img src="{% static 'images/logo1.png' %}" alt="Device Match" height="70px"></a>
+          </div>
+          <div class="col text-right">
+            <a href="/filter_products" class="mr-3 d-block d-md-inline-block"><i class="material-icons">filter_list</i> Filter Products</a>
+            <a href="https://www.google.com/maps/@27.7019173,85.3017454,15z/data=!3m1!4b1!4m5!7m4!1m2!1s112372172874394575415!2sEggHBgIfBjhQJQ%3D%3D!2e2!13s105387087886462521097?entry=ttu" target="_blank"><i class="material-icons">location_on</i> Newroad, Kathmandu</a>
+          </div>
+        </div>
+        <!-- filter parts here -->
+          <div class="py-2 home-search text-center">
+            <h1 class="mb-4">Compare Product Prices</h1>
+            <div class="mb-4"><i>Don't Just Shop, Device Match It! Compare, Click, and Save with Device Match!</i></div>
+            <div class="row align-items-center">
+              <div class="col-12">
+                <div class="row justify-content-md-center">
+                  <div class="col-md-8 search-box">
+                    <form method="get" action="/search" class="form-inline ml-lg-5">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn search-close d-lg-none d-xl-none" type="button"><i class="material-icons">arrow_back</i></button>             
+                        </div>
+
+                        <input type="text" class="form-control focus-shadow-0 search-input" name="q" placeholder="Search Product..." autofocus>
+                        <div class="input-group-append">
+                          <button class="btn btn-theme2 d-none d-lg-block" type="submit"><i class="material-icons">search</i> Search</button>
+                          <button class="btn search-input-clear d-lg-none d-xl-none" type="button"><i class="material-icons">close</i></button> 
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>    
+
+
+
+      </div>   
+    </div>       
+  </header>
+  <!-- ./header -->
+
+{% block content %}
+{% endblock %}
+
+    <footer>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-5 mb-4">
+            <a href="/home"><img class="img-fluid" src="{% static 'images/logo1.png' %}" alt="Device Match" height="70px" ></a><br>
+            Shop Compare is a price comparison website. With the smart technology, it compares the prices from multiple ecommerce sites for smart shopping.
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            <h4>Navigation</h4>
+            <ul class="list-unstyled">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/about">About Us</a>
+            </li>
+            <li>
+                <a href="/contact">Contact Us</a>
+            </li>
+            </ul>
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            <h4>Brands</h4>
+            
+            </ul>
+        </div>
+        <div class="col-lg-3">
+            <h4>Contact Us</h4>
+            <address><strong>Device Match</strong><br>
+              Newroad, Kathmandu
+              <br><br>
+            <i class="material-icons">phone</i> <a href="tel:9818695610">9818695610</a><br>
+            <i class="material-icons">mail</i> <a href="mailto:aadityanarayanchaudhary@kcc.edu.np">aadityanarayanchaudhary</a></address>
+            </div>
+        </div>
+        <div class="copyright pt-3 text-center">
+          Copyright © 2023 Device Match. All Rights Reserved.
+        </div>
+        </div>
+    </footer>
+    <!-- ./footer -->
+
+    {% comment %} comparison item container {% endcomment %}
+    <div class="compare-box p-2 bg-white d-none"></div>
+
+    <!-- Scripts -->
+    {% comment %} <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+      function renderCompareBox(){
+        if($(".compare-box .compare-product-item").length>=1){
+          $(".compare-box").removeClass("d-none");
+          if($(".compare-box .compare-product-item").length==2){
+            $(".compare-box").append('<a href="" class="btn btn-warning btn-compare-go">Compare Now</a>');
+          }else{
+            $(".compare-box .btn-compare-go").remove();
+          }
+        }else{
+          $(".compare-box").addClass("d-none");
+        }
+      }
+
+      function checkAlreadyAdded(productUrl){
+        return productUrl == $(".compare-box .compare-product-item a").attr("href");
+      }
+
+      function getProductId(url){
+        return url.split("/")[2];
+      }
+
+      $(function(){
+        $(document).on("click",".btn-compare",function(){
+          if($(".compare-box .compare-product-item").length<2){
+            var productCard = $(this).closest("div");
+            var productUrl = productCard.find("a").attr("href");
+            if(checkAlreadyAdded(productUrl)){
+              alert("The product has been already added. Please choose new product!");
+            }else{
+              var imageUrl = productCard.find("img").attr("src");
+              var productName = productCard.find(".card-title").html();
+              var compareProductItem = "<div class='compare-product-item'>"+
+                "<button class='btn btn-remove'><i class='material-icons'>close</i></button>"+
+                "<a href='"+productUrl+"'><img src='"+imageUrl+"' class='img-fluid' width='50'>"+
+                  "<div>"+productName+"</div>"+
+                "</a>"+
+              "</div>";
+              $(".compare-box").prepend(compareProductItem);
+              renderCompareBox();
+            }
+          }else{
+            alert("You can compare maximum of 2 products only!");
+          }
+        });
+
+        $(document).on("click",".btn-remove",function(){
+          $(this).closest(".compare-product-item").remove();
+          renderCompareBox();
+        });
+
+        $(document).on("click",".btn-compare-go",function(e){
+          e.preventDefault();
+          var pId1 = getProductId($(".compare-box .compare-product-item:first-of-type a").attr("href"));
+          var pId2 = getProductId($(".compare-box .compare-product-item:last-of-type a").attr("href"));
+          var url = "/compare?product1="+pId1+"&product2="+pId2;
+          window.location.href = url;
+        });
+      });
+      
+    </script> {% endcomment %}
+
+
+
+
+
+
+    {% comment %} ...............2 product..................................................................... {% endcomment %}
+    {% comment %} <script>
+      // Function to get the compare list from session storage
+      function getCompareList() {
+        const compareListJson = sessionStorage.getItem('compareList');
+        return JSON.parse(compareListJson) || [];
+      }
+    
+      // Function to update the compare box
+      function updateCompareBox() {
+        const compareList = getCompareList();
+        const compareBox = $('.compare-box');
+        compareBox.empty();
+    
+        for (const product of compareList) {
+          const compareProductItem = `
+            <div class='compare-product-item'>
+              <!-- Add the product information here -->
+              <button class='btn btn-remove'><i class='material-icons'>close</i></button>
+              <a href='${product.url}'><img src='${product.imageUrl}' class='img-fluid' width='50'>
+                <div>${product.productName}</div>
+              </a>
+            </div>
+          `;
+          compareBox.append(compareProductItem);
+        }
+        
+        renderCompareBox();
+      }
+    
+      $(document).ready(function() {
+        // Add product to the compare list
+        $(document).on('click', '.btn-compare', function() {
+          if ($('.compare-box .compare-product-item').length < 2) {
+            const productCard = $(this).closest('div');
+            const productUrl = productCard.find('a').attr('href');
+            
+            // Check if the product is already added
+            const compareList = getCompareList();
+            if (compareList.some(product => product.url === productUrl)) {
+              alert('The product has already been added. Please choose a new product.');
+            } else {
+              const imageUrl = productCard.find('img').attr('src');
+              const productName = productCard.find('.card-title').html();
+              const product = {
+                url: productUrl,
+                imageUrl: imageUrl,
+                productName: productName
+              };
+              compareList.push(product);
+    
+              // Store the updated compare list in session storage
+              sessionStorage.setItem('compareList', JSON.stringify(compareList));
+              updateCompareBox();
+            }
+          } else {
+            alert('You can compare a maximum of 2 products only!');
+          }
+        });
+    
+        // Remove product from the compare list
+        $(document).on('click', '.btn-remove', function() {
+          const productUrl = $(this).closest('.compare-product-item').find('a').attr('href');
+          const compareList = getCompareList();
+          const updatedList = compareList.filter(product => product.url !== productUrl);
+    
+          // Store the updated compare list in session storage
+          sessionStorage.setItem('compareList', JSON.stringify(updatedList));
+          updateCompareBox();
+        });
+    
+        // Compare products
+        $(document).on('click', '.btn-compare-go', function(e) {
+          e.preventDefault();
+          const compareList = getCompareList();
+          if (compareList.length === 2) {
+            const pId1 = getProductId(compareList[0].url);
+            const pId2 = getProductId(compareList[1].url);
+            const url = `/compare?product1=${pId1}&product2=${pId2}`;
+            window.location.href = url;
+          } else {
+            alert('You need to select 2 products to compare.');
+          }
+        });
+    
+        // Initialize the compare box
+        updateCompareBox();
+      });
+    
+      function renderCompareBox() {
+        if ($('.compare-box .compare-product-item').length >= 1) {
+          $('.compare-box').removeClass('d-none');
+          if ($('.compare-box .compare-product-item').length == 2) {
+            $('.compare-box').append('<a href="" class="btn btn-warning btn-compare-go">Compare Now</a>');
+          } else {
+            $('.compare-box .btn-compare-go').remove();
+          }
+        } else {
+          $('.compare-box').addClass('d-none');
+        }
+      }
+    
+      function getProductId(url) {
+        return url.split('/')[2];
+      }
+    </script> {% endcomment %}
+
+
+
+
+    <script>
+      // Function to get the compare list from session storage
+      function getCompareList() {
+        const compareListJson = sessionStorage.getItem('compareList');
+        return JSON.parse(compareListJson) || [];
+      }
+    
+      // Function to update the compare box
+      function updateCompareBox() {
+        const compareList = getCompareList();
+        const compareBox = $('.compare-box');
+        compareBox.empty();
+    
+        for (const product of compareList) {
+          const compareProductItem = `
+            <div class='compare-product-item'>
+              <!-- Add the product information here -->
+              <button class='btn btn-remove'><i class='material-icons'>close</i></button>
+              <a href='${product.url}'><img src='${product.imageUrl}' class='img-fluid' width='50'>
+                <div>${product.productName}</div>
+              </a>
+            </div>
+          `;
+          compareBox.append(compareProductItem);
+        }
+        
+        renderCompareBox();
+      }
+    
+      $(document).ready(function() {
+        // Add product to the compare list
+        $(document).on('click', '.btn-compare', function() {
+          if ($('.compare-box .compare-product-item').length < 3) {
+            const productCard = $(this).closest('div');
+            const productUrl = productCard.find('a').attr('href');
+            
+            // Check if the product is already added
+            const compareList = getCompareList();
+            if (compareList.some(product => product.url === productUrl)) {
+              alert('The product has already been added. Please choose a new product.');
+            } else {
+              const imageUrl = productCard.find('img').attr('src');
+              const productName = productCard.find('.card-title').html();
+              const product = {
+                url: productUrl,
+                imageUrl: imageUrl,
+                productName: productName
+              };
+              compareList.push(product);
+    
+              // Store the updated compare list in session storage
+              sessionStorage.setItem('compareList', JSON.stringify(compareList));
+              updateCompareBox();
+            }
+          } else {
+            alert('You can compare a maximum of 3 products only!');
+          }
+        });
+    
+        // Remove product from the compare list
+        $(document).on('click', '.btn-remove', function() {
+          const productUrl = $(this).closest('.compare-product-item').find('a').attr('href');
+          const compareList = getCompareList();
+          const updatedList = compareList.filter(product => product.url !== productUrl);
+    
+          // Store the updated compare list in session storage
+          sessionStorage.setItem('compareList', JSON.stringify(updatedList));
+          updateCompareBox();
+        });
+    
+        // Compare products
+        $(document).on('click', '.btn-compare-go', function(e) {
+          e.preventDefault();
+          const compareList = getCompareList();
+          if (compareList.length === 3) {
+            const pId1 = getProductId(compareList[0].url);
+            const pId2 = getProductId(compareList[1].url);
+            const pId3 = getProductId(compareList[2].url);
+            const url = `/compare?product1=${pId1}&product2=${pId2}&product3=${pId3}`;
+            window.location.href =url;
+          } else {
+            alert('You need to select 3 products to compare.');
+          }
+        });
+    
+        // Initialize the compare box
+        updateCompareBox();
+      });
+    
+      function renderCompareBox() {
+        if ($('.compare-box .compare-product-item').length >= 1) {
+          $('.compare-box').removeClass('d-none');
+          if ($('.compare-box .compare-product-item').length == 3) {
+            $('.compare-box').append('<a href="" class="btn btn-warning btn-compare-go">Compare Now</a>');
+          } else {
+            $('.compare-box .btn-compare-go').remove();
+          }
+        } else {
+          $('.compare-box').addClass('d-none');
+        }
+      }
+    
+      function getProductId(url) {
+        return url.split('/')[2];
+      }
+    </script>
+    
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

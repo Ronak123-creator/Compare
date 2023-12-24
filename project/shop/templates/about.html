@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="p-3 p-md-4 mb-4 bg-white"> 
+        <h1 class="page-heading"><span>About Us</span></h1>
+        <div class="text-center">
+            <p>Device Match is a price comparison website that helps users to compare same product price from different ecommerce website.<br>It is a web based application. It encompasses the use of Data Mining, Statistics which makes heavy use of web crawling and web scrapping.</p>
+            <p>We are a dedicated team of 3 people working collectively in this system to make the price comparison more effective
+            and convenient to the user. We like to face challenges and build systems that can solve problems in the market.</p>
+            <br>
+            <div class="row" style="margin-left: 20%;">
+                <div class="col-6 col-md-3">
+                    <img src="{% static 'images/aadi.jpg' %}" width="200" height="200" alt="Aaditya Chaudhary" class="img-fluid img-thumbnail rounded-circle">
+                    <div class="mt-2">Aaditya Chaudhary<br><small>Python Developer and Designer</small></div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <img src="{% static 'images/chandra2.jpeg' %}" width="200" height="200" alt="Chandra Jung Ale" class="img-fluid img-thumbnail rounded-circle">
+                    <div class="mt-2">Chandra Jung Ale<br><small>Python Developer and Designer</small></div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <img src="{% static 'images/ronak1.jpg' %}" width="200" height="200" alt="Ronak Singh Karki" class="img-fluid img-thumbnail rounded-circle">
+                    <div class="mt-2">Ronak Singh Karki<br><small>Python Develeper and Designer</small></div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="text-center">
+            <h3>"Smart Shopping is what we want to build for Everyone"</h3> 
+        </div>
+    </div>
+</div>
+{% endblock %}
